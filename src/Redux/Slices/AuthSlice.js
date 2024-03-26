@@ -13,7 +13,16 @@ export const login = createAsyncThunk("/auth/login", async (data) => {
     const response = await axiosInstance.post("auth/signin", data);
     return response;
   } catch (error) {
-    console.log(error);
+    console.log("printing error", error);
+  }
+});
+
+export const signup = createAsyncThunk("/auth/signup", async (data) => {
+  try {
+    const response = await axiosInstance.post("auth/signup", data);
+    return response;
+  } catch (error) {
+    console.log("printing error", error);
   }
 });
 
