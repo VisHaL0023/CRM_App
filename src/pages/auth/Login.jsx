@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
-import { login } from "../../../Redux/Slices/AuthSlice";
+import { login } from "../../Redux/Slices/AuthSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
