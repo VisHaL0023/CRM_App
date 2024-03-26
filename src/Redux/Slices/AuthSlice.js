@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import toast from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 import axiosInstance from "../../config/axiosInstance";
 const initialState = {
@@ -11,13 +11,13 @@ const initialState = {
 
 export const login = createAsyncThunk("/auth/login", async (data) => {
   try {
-    const response = await axiosInstance.post("auth/signin", data);
+    const response = axiosInstance.post("auth/signin", data);
     toast.promise(response, {
-      loading: "Checking credentials",
-      success: "Successfully logged in",
-      error: "Something went wrong, please try again",
+      loading: "Submitting form",
+      success: "Successfully signed in",
+      error: "Something went wrong, try again",
     });
-    return response;
+    return await response;
   } catch (error) {
     console.log("printing error", error);
   }
@@ -25,13 +25,13 @@ export const login = createAsyncThunk("/auth/login", async (data) => {
 
 export const signup = createAsyncThunk("/auth/signup", async (data) => {
   try {
-    const response = await axiosInstance.post("auth/signup", data);
+    const response = axiosInstance.post("auth/signup", data);
     toast.promise(response, {
       loading: "Submitting form",
       success: "Successfully signed up",
-      error: "Something went wrong, please try again",
+      error: "Something went wrong, try again",
     });
-    return response;
+    return await response;
   } catch (error) {
     console.log("printing error", error);
   }
@@ -44,33 +44,30 @@ const authSlice = createSlice({
     logout: (state) => {
       localStorage.clear();
       state.role = "";
-      state.data = undefined;
       state.isLoggedIn = false;
+      state.data = undefined;
       state.token = "";
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(login.fulfilled, (state, action) => {
-        if (!action.payload) return;
-        state.isLoggedIn = action.payload?.data?.token != undefined;
-        state.data = action.payload?.data?.userData;
-        state.token = action.payload?.data?.token;
-        state.role = action.payload?.data?.userData?.userType;
-        localStorage.setItem("role", action.payload?.data?.userData?.userType);
-        localStorage.setItem(
-          "isLoggedIn",
-          action.payload?.data?.token != undefined
-        );
-        localStorage.setItem(
-          "data",
-          JSON.stringify(action.payload?.data?.userData)
-        );
-        localStorage.setItem("token", action.payload?.data?.token);
-      })
-      .addCase(login.rejected, () => {
-        console.log("Server not up");
-      });
+    builder.addCase(login.fulfilled, (state, action) => {
+      console.log(action);
+      if (!action.payload) return;
+      state.isLoggedIn = action.payload?.data?.token != undefined;
+      state.data = action.payload?.data?.userData;
+      state.token = action.payload?.data?.token;
+      state.role = action.payload?.data?.userData?.userType;
+      localStorage.setItem("role", action.payload?.data?.userData?.userType);
+      localStorage.setItem(
+        "isLoggedIn",
+        action.payload?.data?.token != undefined
+      );
+      localStorage.setItem(
+        "data",
+        JSON.stringify(action.payload?.data?.userData)
+      ); // "{id: 1, name: "abc"}"
+      localStorage.setItem("token", action.payload?.data?.token);
+    });
   },
 });
 

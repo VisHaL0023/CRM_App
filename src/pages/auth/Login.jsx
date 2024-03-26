@@ -28,11 +28,9 @@ const Login = () => {
     });
   }
 
-  function onSubmit() {
+  async function onSubmit() {
     if (!loginDetails.email || !loginDetails.password) return;
-    console.log("calling login", loginDetails);
-    const response = dispatch(login(loginDetails));
-    // console.log(response);
+    const response = await dispatch(login(loginDetails));
     if (response.payload) navigate("/");
     else resetLoginState();
   }

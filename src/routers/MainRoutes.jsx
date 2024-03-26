@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import Login from "../components/pages/auth/Login";
-import Signup from "../components/pages/auth/Signup";
-import Home from "../components/pages/home/Home";
+import Login from "../pages/auth/Login";
+import Signup from "../pages/auth/Signup";
+import Home from "../pages/home/Home";
 
 const MainRoutes = () => {
   return (
