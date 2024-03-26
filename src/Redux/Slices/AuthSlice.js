@@ -1,5 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const AuthSlice = createSlice({});
+const initalState = {
+  role: localStorage.getItem("role") || "",
+  data: localStorage.getItem("data") || "",
+  isLoggedIn: localStorage.getItem("isLoggedIn") || false,
+};
 
-export default AuthSlice;
+const authSlice = createSlice({
+  name: "auth",
+  initalState,
+  reducers: {},
+});
+
+export default authSlice.reducer;
