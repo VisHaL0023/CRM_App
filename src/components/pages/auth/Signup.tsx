@@ -34,6 +34,7 @@ const Signup = () => {
             />
           </div>
           <details className="dropdown mb-4 w-full" id="userTypeDropDown">
+            <summary className="btn"> "User Type"</summary>
             <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 text-white rounded-box w-52">
               <li>
                 <a>customer</a>
