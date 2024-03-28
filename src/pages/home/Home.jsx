@@ -10,7 +10,7 @@ const Home = () => {
   const [ticketsState] = useTickets();
 
   function getPercentage(ticketStatus) {
-    const totalTickets = ticketsState.ticketList.length;
+    const totalTickets = ticketsState.downloadedTickets.length;
     let currTicket;
 
     // Accessing the appropriate property based on ticketStatus
