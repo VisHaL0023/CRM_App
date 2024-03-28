@@ -21,8 +21,8 @@ function HomeLayout({ children }) {
 
   return (
     <div className="min-h-[90vh]">
-      <div className="drawer absolute left-0 right-0 cursor-pointer mt-4 ml-4">
-        <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+      <div className="drawer absolute left-0 right-0 cursor-pointer mt-4 ml-4 inline">
+        <input id="my-drawer" type="checkbox" className="drawer-toggle " />
         <div className="drawer-content">
           <label htmlFor="my-drawer">
             <FiMenu size={"32px"} className="cursor-pointer" />
@@ -32,10 +32,14 @@ function HomeLayout({ children }) {
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
             <li>
-              <a>View All Tickets</a>
+              <a>
+                <Link to="/">Home</Link>
+              </a>
             </li>
             <li>
-              <a>Dashboard</a>
+              <a>
+                <Link to="/dashboard">Dashboard</Link>
+              </a>
             </li>
 
             <li className="absolute bottom-8 w-3/4">
