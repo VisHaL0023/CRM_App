@@ -10,7 +10,7 @@ function Card({
 }) {
   return (
     <div
-      className={`border-b-8 ${borderColor} w-64 h-44 ${background} rounded-md flex flex-col justify-center items-center py-2`}
+      className={`hover:scale-110 transition-all ease-out duration-300 border-b-8 ${borderColor} w-64 h-44 ${background} rounded-md flex flex-col justify-center items-center py-2`}
     >
       <div className="text-primary-content text-2xl mb-2">
         {children} <span>{titleText}</span>
@@ -24,7 +24,7 @@ function Card({
           className={`radial-progress ${fontColor}`}
           style={{ "--value": status }}
         >
-          {status}%
+          {status == 0 ? 0 : status}%
         </div>
       </div>
     </div>
