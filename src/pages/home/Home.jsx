@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BsFillPencilFill } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
 
 import Card from "../../components/Card";
 import HomeLayout from "../../layouts/HomeLayout";
+import { getAllTicketsforTheUser } from "../../Redux/Slices/TicketSlice";
 
 const Home = () => {
+  const authState = useSelector((state) => state.auth);
+  const ticketState = useSelector((state) => state.tickets);
+
+  const dispatch = useDispatch();
+
+  async function loadTicket() {
+    dispatch(getAllTicketsforTheUser());
+  }
+
+  useEffect(() => {
+    loadTicket();
+  }, [authState.token]);
+
   return (
     <HomeLayout>
       {/* <Card>
