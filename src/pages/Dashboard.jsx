@@ -1,8 +1,12 @@
+import { AiOutlineDownload } from "react-icons/ai";
+import { usePDF } from "react-to-pdf";
+
 import useTickets from "../hooks/useTickets";
 import HomeLayout from "../layouts/HomeLayout";
 
 function Dashboard() {
   const [ticketState] = useTickets();
+  const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
 
   return (
     <HomeLayout>
@@ -12,15 +16,19 @@ function Dashboard() {
         font-bold hover:bg-yellow-400 transition-all ease-in-out duration-300"
         >
           Tickets Records
+          <AiOutlineDownload
+            className="cursor-pointer inline ml-3"
+            onClick={() => toPDF()}
+          />
         </div>
 
         {/* Table */}
 
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full overflow-hidden" ref={targetRef}>
           {/* Title row */}
           <div
             className="flex text-white font-bold justify-between items-center 
-          gap-3 bg-purple-600 px-2 py-2 grid-cols-7"
+          gap-3 bg-purple-500 px-2 py-2 grid-cols-7"
           >
             <div className="table-title basis-[8%] justify-start">
               Ticket Id
