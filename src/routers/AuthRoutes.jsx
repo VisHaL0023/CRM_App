@@ -9,7 +9,7 @@ function AuthRoutes({ allowListedRoles }) {
       {allowListedRoles.find((givenRole) => givenRole == role) ? (
         <Outlet />
       ) : (
-        <div>denied</div>
+        <div>Request denied</div>
       )}
     </>
   );
