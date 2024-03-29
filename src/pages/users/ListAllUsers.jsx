@@ -83,7 +83,11 @@ function ListAllUsers() {
             data={userList}
           />
         )}
-        <UserDetailsModal key={userDisplay.email} user={userDisplay} />
+        <UserDetailsModal
+          key={userDisplay.email}
+          user={userDisplay}
+          resetTable={loadUsers}
+        />
       </div>
     </HomeLayout>
   );

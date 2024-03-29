@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 import axiosInstance from "../config/axiosInstance";
 
-function UserDetailsModal({ user }) {
+function UserDetailsModal({ user, resetTable }) {
   const [userDisplay, setUserDisplay] = useState(user);
 
   async function handleStatusChange(e) {
@@ -37,6 +37,7 @@ function UserDetailsModal({ user }) {
           userType: user.userType,
           clientName: user.clientName,
         });
+        resetTable();
       }
     } catch (error) {
       toast.error("Something went wrong");
