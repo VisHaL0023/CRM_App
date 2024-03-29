@@ -61,6 +61,27 @@ export const getAllTicketsforTheUser = createAsyncThunk(
   }
 );
 
+export const getAllCreatedTicketsforTheUser = createAsyncThunk(
+  "tickets/getMyCreatedTickets",
+  async () => {
+    try {
+      const response = axiosInstance.get("getMyCreatedTickets", {
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      });
+      toast.promise(response, {
+        success: "Successfully loaded all the tickets",
+        loading: "Fetching tickets belonging to you",
+        error: "Something went wrong",
+      });
+      return await response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const createTicket = createAsyncThunk(
   "tickets/createTicket",
   async (ticket) => {
@@ -105,6 +126,23 @@ const ticketSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(getAllCreatedTicketsforTheUser.fulfilled, (state, action) => {
+        if (!action?.payload?.data) return;
+        state.ticketList = action?.payload?.data?.result;
+        state.downloadedTickets = action?.payload?.data?.result;
+        const tickets = action?.payload?.data?.result;
+        state.ticketDistribution = {
+          open: 0,
+          inProgress: 0,
+          resolved: 0,
+          onHold: 0,
+          cancelled: 0,
+        };
+        tickets.forEach((ticket) => {
+          state.ticketDistribution[ticket.status] =
+            state.ticketDistribution[ticket.status] + 1;
+        });
+      })
       .addCase(getAllTicketsforTheUser.fulfilled, (state, action) => {
         if (!action?.payload?.data) return;
         state.ticketList = action?.payload?.data?.result;

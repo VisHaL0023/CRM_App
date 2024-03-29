@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 
 import {
   filterTickets,
+  getAllCreatedTicketsforTheUser,
   getAllTicketsforTheUser,
   resetTicketList,
 } from "../Redux/Slices/TicketSlice";
@@ -17,7 +18,11 @@ function useTickets() {
 
   async function loadTickets() {
     if (ticketState.downloadedTickets.length == 0) {
-      await dispatch(getAllTicketsforTheUser());
+      if (authState.role === "customer") {
+        await dispatch(getAllCreatedTicketsforTheUser());
+      } else {
+        await dispatch(getAllTicketsforTheUser());
+      }
     }
     if (searchParams.get("status")) {
       // dispatch a filter action
