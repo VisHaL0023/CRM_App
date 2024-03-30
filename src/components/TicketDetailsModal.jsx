@@ -35,7 +35,7 @@ function TicketDetailsModal({ ticket }) {
           onChange={handleTicketChange}
         ></textarea>
 
-        <h1 className="text-lg text-white">
+        <h1 className="text-lg">
           Priority:
           <select
             name="ticketPriority"
@@ -57,7 +57,7 @@ function TicketDetailsModal({ ticket }) {
           </select>
         </h1>
 
-        <h1 className="text-lg text-white my-4">
+        <h1 className="text-lg my-4">
           Status:
           <select
             name="status"
@@ -94,7 +94,7 @@ function TicketDetailsModal({ ticket }) {
         <div className="modal-action">
           <button
             onClick={handleFormSubmit}
-            className="btn-success px-4 py-2 rounded-md hover:bg-green-400 transition-all ease-in-out duration-300 font-semibold text-lg"
+            className="btn-success bg-deep-orange-300 px-4 py-2 rounded-md hover:bg-deep-orange-500 transition-all ease-in-out duration-300 font-semibold text-lg"
           >
             Update ticket
           </button>

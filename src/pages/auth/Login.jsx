@@ -1,4 +1,10 @@
-import { Button, Card, Input, Typography } from "@material-tailwind/react";
+import {
+  Button,
+  Card,
+  CardHeader,
+  Input,
+  Typography,
+} from "@material-tailwind/react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -40,12 +46,15 @@ const Login = () => {
     <div className="flex justify-center items-center">
       <div className="text-primary-content">
         <Card className="mt-6 p-5">
-          <Typography variant="h4" color="blue-gray">
-            Sign Up
-          </Typography>
-          <Typography color="gray" className="mt-1 font-normal">
-            Nice to meet you! Enter your details to register.
-          </Typography>
+          <CardHeader
+            variant="gradient"
+            color="gray"
+            className="mb-4 grid h-28 place-items-center"
+          >
+            <Typography variant="h3" color="white">
+              Log In
+            </Typography>
+          </CardHeader>
           <form className="mt-5 mb-2 w-80 max-w-screen-lg sm:w-96">
             <div className="mb-1 flex flex-col gap-3">
               <Typography variant="h6" color="blue-gray" className="-mb-3">

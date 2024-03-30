@@ -4,6 +4,13 @@ export default withMT({
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
+    colors: {
+      // Configure your color palette here
+      btnColor: "#9d174d",
+    },
   },
-  // plugins: [require("daisyui")],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["cupcake"],
+  },
 });

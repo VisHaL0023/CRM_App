@@ -98,7 +98,7 @@ function Dashboard() {
   return (
     <HomeLayout>
       <div className="flex mt-5">
-        <div className="flex w-1/4 h-[450px]">
+        <div className="lg:flex lg:w-1/4 lg:h-[450px] md:hidden sm:hidden">
           <Card>
             <List>
               <div className="p-2 divide-y">
@@ -117,7 +117,7 @@ function Dashboard() {
             </List>
           </Card>
         </div>
-        <Card className="h-full w-3/4 ">
+        <Card className="h-full lg:w-3/4 md:w-full">
           <CardHeader floated={false} shadow={false} className="rounded-none">
             <div className="mb-1 flex flex-col items-center justify-center content-center gap-2">
               <Typography variant="h2" color="blue-gray">

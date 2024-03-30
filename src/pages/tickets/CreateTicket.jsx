@@ -1,3 +1,11 @@
+import {
+  Button,
+  Card,
+  CardHeader,
+  Input,
+  Textarea,
+  Typography,
+} from "@material-tailwind/react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,54 +56,71 @@ function CreateTicket() {
 
   return (
     <HomeLayout>
-      <div className="min-h-[90vh] flex items-center justify-center">
-        <form
-          onSubmit={onFormSubmit}
-          className="min-w-[40rem] border p-20 border-sky-500 rounded-lg hover:bg-sky-900 transition-all ease-in-out duration-300"
-        >
-          <h1 className="text-3xl font-semibold text-white text-center">
-            Create new ticket
-          </h1>
+      <div className="flex felx-col items-center justify-center mt-5 p-5">
+        <div className="flex-col items-center justify-center mr-16">
+          <Typography variant="h2" color="blue-gray">
+            Create your ticket
+          </Typography>
+          <Typography color="gray" className="mt-1 font-normal w-96">
+            Please add your ticket and description in datails to get to your
+            problem.
+          </Typography>
+        </div>
+        <div>
+          <div className="flex justify-center items-center">
+            <div className="text-primary-content">
+              <Card className="mt-6 p-5">
+                <CardHeader
+                  variant="gradient"
+                  color="gray"
+                  className="mb-4 grid h-28 place-items-center"
+                >
+                  <Typography variant="h3" color="white">
+                    Create Ticket
+                  </Typography>
+                </CardHeader>
+                <form
+                  className="mt-5 mb-2 w-80 max-w-screen-lg sm:w-96"
+                  onSubmit={onFormSubmit}
+                >
+                  <div className="mb-1 flex flex-col gap-3">
+                    <Typography
+                      variant="h6"
+                      color="blue-gray"
+                      className="-mb-3"
+                    >
+                      Title
+                    </Typography>
+                    <Input
+                      size="md"
+                      value={ticket.title}
+                      onChange={handleFormChange}
+                      name="title"
+                      placeholder="Enter your ticket heading"
+                      className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                      labelProps={{
+                        className: "before:content-none after:content-none",
+                      }}
+                    />
 
-          <div className="form-control w-full my-4">
-            <label className="label">
-              <span className="label-text text-white text-lg">
-                What is title of the issue?
-              </span>
-            </label>
-            <input
-              value={ticket.title}
-              onChange={handleFormChange}
-              name="title"
-              type="text"
-              placeholder="Type here"
-              className="input input-bordered input-primary w-full bg-white text-black"
-            />
+                    <Textarea
+                      value={ticket.description}
+                      onChange={handleFormChange}
+                      name="description"
+                      variant="outlined"
+                      label="Description"
+                      rows={8}
+                    />
+                  </div>
+
+                  <Button className="mt-6" fullWidth type="submit">
+                    Create ticket
+                  </Button>
+                </form>
+              </Card>
+            </div>
           </div>
-
-          <div className="form-control w-full my-4">
-            <label className="label">
-              <span className="label-text text-white text-lg">
-                Please describe your issue?
-              </span>
-            </label>
-            <textarea
-              value={ticket.description}
-              onChange={handleFormChange}
-              name="description"
-              placeholder="Type here"
-              rows="8"
-              className="p-2 resize-none w-full rounded-md bg-white text-black"
-            ></textarea>
-          </div>
-
-          <button
-            type="submit"
-            className="w-full px-4 py-2 bg-green-500 text-lg font-semibold text-white rounded-md hover:bg-green-600 transition-all ease-in-out duration-300"
-          >
-            Submit
-          </button>
-        </form>
+        </div>
       </div>
     </HomeLayout>
   );

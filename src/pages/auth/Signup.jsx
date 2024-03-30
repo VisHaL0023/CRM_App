@@ -1,4 +1,15 @@
-import { Button, Card, Input, Typography } from "@material-tailwind/react";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import {
+  Button,
+  Card,
+  CardHeader,
+  Input,
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
+  Typography,
+} from "@material-tailwind/react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -34,8 +45,6 @@ const Signup = () => {
       userType: userTypeSelected.toLowerCase(),
       userStatus: userTypeSelected === "customer" ? "approved" : "suspended",
     });
-    const dropDown = document.getElementById("userTypeDropDown");
-    dropDown.open = !dropDown.open;
   }
 
   function resetSignupState() {
@@ -68,12 +77,15 @@ const Signup = () => {
     <div className="flex justify-center items-center">
       <div className="text-primary-content">
         <Card className="mt-6 p-5">
-          <Typography variant="h4" color="blue-gray">
-            Sign Up
-          </Typography>
-          <Typography color="gray" className="mt-1 font-normal">
-            Nice to meet you! Enter your details to register.
-          </Typography>
+          <CardHeader
+            variant="gradient"
+            color="gray"
+            className="mb-4 grid h-24 place-items-center"
+          >
+            <Typography variant="h3" color="white">
+              Sign Up
+            </Typography>
+          </CardHeader>
           <form className="mt-5 mb-2 w-80 max-w-screen-lg sm:w-96">
             <div className="mb-1 flex flex-col gap-3">
               <Typography variant="h6" color="blue-gray" className="-mb-3">
@@ -120,30 +132,25 @@ const Signup = () => {
                 }}
               />
             </div>
-            <div class="grid w-full place-items-center overflow-x-scroll rounded-lg p-2 lg:overflow-visible">
-              <div class="flex divide-x divide-gray-800 row">
-                <button
-                  class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.75] active:shadow-none rounded-r-none border-r-0"
-                  type="button"
-                  onClick={handleUserType}
-                >
-                  customer
-                </button>
-                <button
-                  class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.75] active:shadow-none rounded-r-none border-r-0 rounded-l-none"
-                  type="button"
-                  onClick={handleUserType}
-                >
-                  engineer
-                </button>
-                <button
-                  class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.75] active:shadow-blue-gray-600 rounded-l-none"
-                  type="button"
-                  onClick={handleUserType}
-                >
-                  admin
-                </button>
-              </div>
+            <div className="flex mt-4 items-center justify-start mb-3">
+              <Typography variant="h6" color="blue-gray" className="mr-3">
+                Type:
+              </Typography>
+              <Menu>
+                <MenuHandler>
+                  <Button className="bg-blue-gray-400 px-3 py-1 flex w-24 items-center">
+                    {!signupDetails.userType
+                      ? "User Type"
+                      : signupDetails.userType}
+                    <ChevronDownIcon className="w-5 h-5 ml-2" />
+                  </Button>
+                </MenuHandler>
+                <MenuList onClick={handleUserType} className="text-black">
+                  <MenuItem>customer</MenuItem>
+                  <MenuItem>engineer</MenuItem>
+                  <MenuItem>admin</MenuItem>
+                </MenuList>
+              </Menu>
             </div>
             <div className="mt-1 flex flex-col">
               <Typography variant="h6" color="blue-gray">
@@ -162,7 +169,7 @@ const Signup = () => {
                 }}
               />
             </div>
-            <Button className="mt-6" fullWidth onClick={onSubmit}>
+            <Button className=" mt-6" fullWidth onClick={onSubmit}>
               sign up
             </Button>
             <Typography color="gray" className="mt-4 text-center font-normal">

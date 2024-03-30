@@ -2,7 +2,7 @@ import {
   Button,
   Card,
   CardBody,
-  CardFooter,
+  CardHeader,
   Typography,
 } from "@material-tailwind/react";
 import { useState } from "react";
@@ -55,76 +55,94 @@ function UserDetailsModal({ user, resetTable }) {
   }
 
   return (
-    <dialog id="user_details_modal" className="modal">
-      <Card className="mt-6 w-96 h-[30rem]">
+    <dialog id="user_details_modal" className="modal mt-3">
+      <Card className="mt-6 w-[30rem] h-[30rem]">
+        <CardHeader
+          variant="gradient"
+          color="gray"
+          className="mb-4 grid h-20 place-items-center"
+        >
+          <Typography variant="h3" color="white">
+            User Details
+          </Typography>
+        </CardHeader>
         <CardBody>
-          <h3 className="font-bold text-lg">User Details</h3>
-          <p className="py-4">
-            Name: <span className="text-yellow-500"> {userDisplay.name}</span>
-          </p>
-          <p className="py-4">
-            Client Name:{" "}
-            <span className="text-yellow-500"> {userDisplay.clientName}</span>
-          </p>
-          <p className="py-4">
-            Status:
-            <span className="text-yellow-500">
-              <details className="dropdown ml-2" id="userStatusDropdown">
-                <summary className="m-1 btn">{userDisplay.userStatus}</summary>
-                <ul
-                  name="userStatus"
-                  onClick={handleUserChange}
-                  className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52"
-                >
-                  <li>
-                    <a>approved</a>
-                  </li>
-                  <li>
-                    <a>suspended</a>
-                  </li>
-                  <li>
-                    <a>rejected</a>
-                  </li>
-                </ul>
-              </details>
-            </span>
-          </p>
-          <p className="py-4">
-            Type:
-            <span className="text-yellow-500">
-              <details className="dropdown ml-2" id="userTypeDropdown">
-                <summary className="m-1 btn">{userDisplay.userType}</summary>
-                <ul
-                  name="userType"
-                  onClick={handleUserChange}
-                  className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52"
-                >
-                  <li>
-                    <a>customer</a>
-                  </li>
-                  <li>
-                    <a>admin</a>
-                  </li>
-                  <li>
-                    <a>engineer</a>
-                  </li>
-                </ul>
-              </details>
-            </span>
-          </p>
-          <p className="py-4">
-            Type:{" "}
-            <span className="text-yellow-500"> {userDisplay.userType}</span>
-          </p>
-          <p className="py-4">
-            email: <span className="text-yellow-500"> {userDisplay.email}</span>
-          </p>
+          <div className="bg-gray-100 rounded-lg p-4">
+            <div class="flex items-center justify-between mb-4">
+              <p class="flex-grow">Name :</p>
+              <p className="text-black text-md mb-2">{userDisplay.name}</p>
+            </div>
+            <div class="flex items-center justify-between mb-4">
+              <p class="flex-grow">Client name :</p>
+              <p className="text-black text-md mb-2">
+                {userDisplay.clientName}
+              </p>
+            </div>
+            <div class="flex items-center justify-between mb-4">
+              <p class="flex-grow">Status :</p>
+              <span className="text-black">
+                <details className="dropdown" id="userStatusDropdown">
+                  <summary className="btn bg-blue-gray-300 px-1 py-1 rounded-md">
+                    {userDisplay.userStatus}
+                  </summary>
+                  <ul
+                    name="userStatus"
+                    onClick={handleUserChange}
+                    className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52"
+                  >
+                    <li>
+                      <a>approved</a>
+                    </li>
+                    <li>
+                      <a>suspended</a>
+                    </li>
+                    <li>
+                      <a>rejected</a>
+                    </li>
+                  </ul>
+                </details>
+              </span>
+            </div>
+            <div class="flex items-center justify-between mb-4">
+              <p class="flex-grow">Type :</p>
+              <span className="text-black">
+                <details className="dropdown" id="userStatusDropdown">
+                  <summary className="btn bg-blue-gray-300 px-1 py-1 rounded-md">
+                    {userDisplay.userType}
+                  </summary>
+                  <ul
+                    name="userStatus"
+                    onClick={handleUserChange}
+                    className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52"
+                  >
+                    <li>
+                      <a>customer</a>
+                    </li>
+                    <li>
+                      <a>admin</a>
+                    </li>
+                    <li>
+                      <a>engineer</a>
+                    </li>
+                  </ul>
+                </details>
+              </span>
+            </div>
+            <div class="flex items-center justify-between mb-4">
+              <p class="flex-grow">Type :</p>
+              <p className="text-black text-md mb-2">{userDisplay.userType}</p>
+            </div>
+            <div class="flex items-center justify-between mb-4">
+              <p class="flex-grow">Email :</p>
+              <p className="text-black text-md mb-2">{userDisplay.email}</p>
+            </div>
+          </div>
+          <form method="dialog" className="modal-backdrop mt-3">
+            <button>
+              <Button>Close</Button>
+            </button>
+          </form>
         </CardBody>
-        <form method="dialog" className="modal-backdrop">
-          <Button className="p-3">
-            <button>close</button>
-          </Button>
-        </form>
       </Card>
     </dialog>
   );

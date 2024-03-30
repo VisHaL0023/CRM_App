@@ -20,10 +20,10 @@ function Card({
     <div
       onClick={onCardClick}
       className={`hover:scale-110 hover:cursor-pointer transition-all ease-out duration-300 
-      border-b-8 ${borderColor} w-52 h-40 ${background} 
+      border-b-8 ${borderColor} w-52 h-48 ${background} 
       rounded-md flex flex-col justify-center items-center py-2`}
     >
-      <div className="text-primary-content text-2xl mb-2">
+      <div className="text-primary-content text-2xl mb-2 pt-2">
         {children} <span>{titleText}</span>
       </div>
 

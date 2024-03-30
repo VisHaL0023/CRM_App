@@ -56,7 +56,7 @@ const Home = () => {
                 status={getPercentage("open")}
                 quantity={ticketsState.ticketDistribution.open}
                 background="bg-yellow-300"
-                borderColor="border-green-300"
+                borderColor="border-yellow-700"
                 fontColor="text-black"
                 dividerColor="bg-black"
               >
@@ -66,8 +66,8 @@ const Home = () => {
                 titleText="In Progress"
                 status={getPercentage("inProgress")}
                 quantity={ticketsState.ticketDistribution.inProgress}
-                background="bg-orange-300"
-                borderColor="border-red-400"
+                background="bg-blue-300"
+                borderColor="border-blue-600"
                 fontColor="text-black"
                 dividerColor="bg-black"
               >
@@ -99,8 +99,8 @@ const Home = () => {
                 titleText="Cancelled"
                 status={getPercentage("cancelled")}
                 quantity={ticketsState.ticketDistribution.cancelled}
-                background="bg-blue-300"
-                borderColor="border-violet-500"
+                background="bg-red-300"
+                borderColor="border-red-700"
                 fontColor="text-black"
                 dividerColor="bg-black"
               >

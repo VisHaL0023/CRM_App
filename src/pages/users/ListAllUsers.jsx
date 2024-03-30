@@ -73,7 +73,7 @@ function ListAllUsers() {
 
   return (
     <HomeLayout>
-      <div className="min-h-[90vh] flex flex-col items-center justify-center">
+      <div className="min-h-[90vh] flex flex-col items-center justify-center mt-3">
         {userList && (
           <Card className="h-full w-3/4 ">
             <CardHeader floated={false} shadow={false} className="rounded-none">
