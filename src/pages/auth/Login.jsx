@@ -1,3 +1,4 @@
+import { Button, Card, Input, Typography } from "@material-tailwind/react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -36,52 +37,59 @@ const Login = () => {
   }
 
   return (
-    <div className="flex justify-center items-center h-[90vh]">
-      <div className="card w-96 bg-primary text-primary-content">
-        <div className="card-body flex flex-col items-center">
-          <div className="w-full flex justify-center">
-            <h2 className="card-title text-4xl text-white">Login</h2>
-          </div>
-          <div className="w-full">
-            <input
-              onChange={handleInputChange}
-              name="email"
-              autoComplete="one-time-code"
-              type="text"
-              value={loginDetails.email}
-              placeholder="email ..."
-              className="input text-white input-bordered input-primary w-full max-w-xs"
-            />
-          </div>
-          <div className="w-full">
-            <input
-              onChange={handleInputChange}
-              name="password"
-              autoComplete="one-time-code"
-              type="password"
-              value={loginDetails.password}
-              placeholder="password"
-              className="input text-white input-bordered input-primary w-full max-w-xs"
-            />
-          </div>
-          <div className="w-full card-actions mt-4">
-            <button
-              onClick={onSubmit}
-              className="btn btn-warning w-full font-bold text-xl hover:bg-yellow-400 transition-all ease-in-out duration-300"
-            >
-              Submit
-            </button>
-          </div>
-          <p className="text-l text-white">
-            Donot have an account ?{" "}
-            <Link
-              className="text-yellow-200 font-semibold hover:text-white"
-              to="/signup"
-            >
-              Login Instead
-            </Link>
-          </p>
-        </div>
+    <div className="flex justify-center items-center">
+      <div className="text-primary-content">
+        <Card className="mt-6 p-5">
+          <Typography variant="h4" color="blue-gray">
+            Sign Up
+          </Typography>
+          <Typography color="gray" className="mt-1 font-normal">
+            Nice to meet you! Enter your details to register.
+          </Typography>
+          <form className="mt-5 mb-2 w-80 max-w-screen-lg sm:w-96">
+            <div className="mb-1 flex flex-col gap-3">
+              <Typography variant="h6" color="blue-gray" className="-mb-3">
+                Your Email
+              </Typography>
+              <Input
+                name="email"
+                size="md"
+                value={loginDetails.email}
+                onChange={handleInputChange}
+                placeholder="Enter your email"
+                className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                labelProps={{
+                  className: "before:content-none after:content-none",
+                }}
+              />
+              <Typography variant="h6" color="blue-gray" className="-mb-3">
+                Password
+              </Typography>
+              <Input
+                name="password"
+                type="password"
+                size="md"
+                value={loginDetails.password}
+                onChange={handleInputChange}
+                placeholder="********"
+                className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                labelProps={{
+                  className: "before:content-none after:content-none",
+                }}
+              />
+            </div>
+
+            <Button className="mt-6" fullWidth onClick={onSubmit}>
+              Log in
+            </Button>
+            <Typography color="gray" className="mt-4 text-center font-normal">
+              Don't have an account?{" "}
+              <Link to="/signup" className="font-medium text-gray-900">
+                Sign up
+              </Link>
+            </Typography>
+          </form>
+        </Card>
       </div>
     </div>
   );

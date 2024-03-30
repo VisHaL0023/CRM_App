@@ -1,3 +1,11 @@
+import {
+  Button,
+  Card,
+  CardBody,
+  Checkbox,
+  Input,
+  Typography,
+} from "@material-tailwind/react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -27,9 +35,10 @@ const Signup = () => {
 
   function handleUserType(e) {
     const userTypeSelected = e.target.textContent;
+    // console.log("btn", userTypeSelected);
     setSignUpDetails({
       ...signupDetails,
-      userType: userTypeSelected,
+      userType: userTypeSelected.toLowerCase(),
       userStatus: userTypeSelected === "customer" ? "approved" : "suspended",
     });
     const dropDown = document.getElementById("userTypeDropDown");
@@ -63,96 +72,114 @@ const Signup = () => {
   }
 
   return (
-    <div className="flex justify-center items-center h-[90vh]">
-      <div className="card w-96 bg-primary text-primary-content">
-        <div className="card-body flex flex-col items-center">
-          <div className="w-full flex justify-center">
-            <h2 className="card-title text-4xl text-white">Signup</h2>
-          </div>
-          <div className="w-full">
-            <input
-              onChange={handleInputChange}
-              name="email"
-              autoComplete="one-time-code"
-              type="text"
-              placeholder="email ..."
-              value={signupDetails.email}
-              className="input text-white input-bordered input-primary w-full max-w-xs"
-            />
-          </div>
-          <div className="w-full">
-            <input
-              onChange={handleInputChange}
-              name="password"
-              autoComplete="one-time-code"
-              type="password"
-              placeholder="password"
-              value={signupDetails.password}
-              className="input text-white input-bordered input-primary w-full max-w-xs"
-            />
-          </div>
-          <div className="w-full">
-            <input
-              onChange={handleInputChange}
-              name="name"
-              autoComplete="one-time-code"
-              type="text"
-              placeholder="name"
-              value={signupDetails.name}
-              className="input text-white input-bordered input-primary w-full max-w-xs"
-            />
-          </div>
-          <details className="dropdown mb-4 w-full" id="userTypeDropDown">
-            <summary className="btn">
-              {!signupDetails.userType ? "User Type" : signupDetails.userType}
-            </summary>
-            <ul
-              onClick={handleUserType}
-              className="p-2 shadow menu dropdown-content z-[1] bg-base-100 text-white rounded-box w-52"
-            >
-              <li>
-                <a>customer</a>
-              </li>
-              <li>
-                <a>engineer</a>
-              </li>
-              <li>
-                <a>admin</a>
-              </li>
-            </ul>
-          </details>
-
-          <div className="w-full">
-            <input
-              onChange={handleInputChange}
-              name="clientName"
-              autoComplete="one-time-code"
-              type="text"
-              placeholder="client name"
-              value={signupDetails.clientName}
-              className="input text-white input-bordered input-primary w-full max-w-xs"
-            />
-          </div>
-
-          <div className="w-full card-actions mt-4">
-            <button
-              onClick={onSubmit}
-              className="btn btn-warning w-full font-bold text-xl hover:bg-yellow-400 transition-all ease-in-out duration-300"
-            >
-              Submit
-            </button>
-          </div>
-
-          <p className="text-l text-white">
-            Already have an account ?{" "}
-            <Link
-              className="text-yellow-200 font-semibold hover:text-white"
-              to="/login"
-            >
-              Login Instead
-            </Link>
-          </p>
-        </div>
+    <div className="flex justify-center items-center">
+      <div className="text-primary-content">
+        <Card className="mt-6 p-5">
+          <Typography variant="h4" color="blue-gray">
+            Sign Up
+          </Typography>
+          <Typography color="gray" className="mt-1 font-normal">
+            Nice to meet you! Enter your details to register.
+          </Typography>
+          <form className="mt-5 mb-2 w-80 max-w-screen-lg sm:w-96">
+            <div className="mb-1 flex flex-col gap-3">
+              <Typography variant="h6" color="blue-gray" className="-mb-3">
+                Your Name
+              </Typography>
+              <Input
+                name="name"
+                size="md"
+                value={signupDetails.name}
+                onChange={handleInputChange}
+                placeholder="Enter your name"
+                className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                labelProps={{
+                  className: "before:content-none after:content-none",
+                }}
+              />
+              <Typography variant="h6" color="blue-gray" className="-mb-3">
+                Your Email
+              </Typography>
+              <Input
+                name="email"
+                size="md"
+                value={signupDetails.email}
+                onChange={handleInputChange}
+                placeholder="Enter your email"
+                className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                labelProps={{
+                  className: "before:content-none after:content-none",
+                }}
+              />
+              <Typography variant="h6" color="blue-gray" className="-mb-3">
+                Password
+              </Typography>
+              <Input
+                name="password"
+                type="password"
+                size="md"
+                value={signupDetails.password}
+                onChange={handleInputChange}
+                placeholder="********"
+                className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                labelProps={{
+                  className: "before:content-none after:content-none",
+                }}
+              />
+            </div>
+            <div class="grid w-full place-items-center overflow-x-scroll rounded-lg p-2 lg:overflow-visible">
+              <div class="flex divide-x divide-gray-800 row">
+                <button
+                  class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.75] active:shadow-none rounded-r-none border-r-0"
+                  type="button"
+                  onClick={handleUserType}
+                >
+                  customer
+                </button>
+                <button
+                  class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.75] active:shadow-none rounded-r-none border-r-0 rounded-l-none"
+                  type="button"
+                  onClick={handleUserType}
+                >
+                  engineer
+                </button>
+                <button
+                  class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.75] active:shadow-blue-gray-600 rounded-l-none"
+                  type="button"
+                  onClick={handleUserType}
+                >
+                  admin
+                </button>
+              </div>
+            </div>
+            <div className="mt-1 flex flex-col">
+              <Typography variant="h6" color="blue-gray">
+                Client Name
+              </Typography>
+              <Input
+                name="clientName"
+                type="name"
+                size="md"
+                value={signupDetails.clientName}
+                onChange={handleInputChange}
+                placeholder="Client Name"
+                className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                labelProps={{
+                  className: "before:content-none after:content-none",
+                }}
+              />
+            </div>
+            <Button className="mt-6" fullWidth onClick={onSubmit}>
+              sign up
+            </Button>
+            <Typography color="gray" className="mt-4 text-center font-normal">
+              Already have an account?{" "}
+              <Link to="/login" className="font-medium text-gray-900">
+                Sign In
+              </Link>
+            </Typography>
+          </form>
+        </Card>
       </div>
     </div>
   );

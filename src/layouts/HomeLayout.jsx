@@ -69,8 +69,8 @@ function HomeLayout({ children }) {
           className="h-[calc(100vh-2rem)] w-full p-3"
         >
           <div className="mb-2 flex items-center gap-4 p-4">
-            <Typography variant="h5" color="blue-gray">
-              Hi
+            <Typography variant="h3" color="blue-gray">
+              Hi {authState?.data?.name}
             </Typography>
           </div>
           <List>

@@ -1,3 +1,10 @@
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  Typography,
+} from "@material-tailwind/react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -49,71 +56,76 @@ function UserDetailsModal({ user, resetTable }) {
 
   return (
     <dialog id="user_details_modal" className="modal">
-      <div className="modal-box text-lg font-semibold ">
-        <h3 className="font-bold text-lg">User Details</h3>
-        <p className="py-4">
-          Name: <span className="text-yellow-500"> {userDisplay.name}</span>
-        </p>
-        <p className="py-4">
-          Client Name:{" "}
-          <span className="text-yellow-500"> {userDisplay.clientName}</span>
-        </p>
-        <p className="py-4">
-          Status:
-          <span className="text-yellow-500">
-            <details className="dropdown ml-2" id="userStatusDropdown">
-              <summary className="m-1 btn">{userDisplay.userStatus}</summary>
-              <ul
-                name="userStatus"
-                onClick={handleUserChange}
-                className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52"
-              >
-                <li>
-                  <a>approved</a>
-                </li>
-                <li>
-                  <a>suspended</a>
-                </li>
-                <li>
-                  <a>rejected</a>
-                </li>
-              </ul>
-            </details>
-          </span>
-        </p>
-        <p className="py-4">
-          Type:
-          <span className="text-yellow-500">
-            <details className="dropdown ml-2" id="userTypeDropdown">
-              <summary className="m-1 btn">{userDisplay.userType}</summary>
-              <ul
-                name="userType"
-                onClick={handleUserChange}
-                className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52"
-              >
-                <li>
-                  <a>customer</a>
-                </li>
-                <li>
-                  <a>admin</a>
-                </li>
-                <li>
-                  <a>engineer</a>
-                </li>
-              </ul>
-            </details>
-          </span>
-        </p>
-        <p className="py-4">
-          Type: <span className="text-yellow-500"> {userDisplay.userType}</span>
-        </p>
-        <p className="py-4">
-          email: <span className="text-yellow-500"> {userDisplay.email}</span>
-        </p>
-      </div>
-      <form method="dialog" className="modal-backdrop">
-        <button>close</button>
-      </form>
+      <Card className="mt-6 w-96 h-[30rem]">
+        <CardBody>
+          <h3 className="font-bold text-lg">User Details</h3>
+          <p className="py-4">
+            Name: <span className="text-yellow-500"> {userDisplay.name}</span>
+          </p>
+          <p className="py-4">
+            Client Name:{" "}
+            <span className="text-yellow-500"> {userDisplay.clientName}</span>
+          </p>
+          <p className="py-4">
+            Status:
+            <span className="text-yellow-500">
+              <details className="dropdown ml-2" id="userStatusDropdown">
+                <summary className="m-1 btn">{userDisplay.userStatus}</summary>
+                <ul
+                  name="userStatus"
+                  onClick={handleUserChange}
+                  className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <a>approved</a>
+                  </li>
+                  <li>
+                    <a>suspended</a>
+                  </li>
+                  <li>
+                    <a>rejected</a>
+                  </li>
+                </ul>
+              </details>
+            </span>
+          </p>
+          <p className="py-4">
+            Type:
+            <span className="text-yellow-500">
+              <details className="dropdown ml-2" id="userTypeDropdown">
+                <summary className="m-1 btn">{userDisplay.userType}</summary>
+                <ul
+                  name="userType"
+                  onClick={handleUserChange}
+                  className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <a>customer</a>
+                  </li>
+                  <li>
+                    <a>admin</a>
+                  </li>
+                  <li>
+                    <a>engineer</a>
+                  </li>
+                </ul>
+              </details>
+            </span>
+          </p>
+          <p className="py-4">
+            Type:{" "}
+            <span className="text-yellow-500"> {userDisplay.userType}</span>
+          </p>
+          <p className="py-4">
+            email: <span className="text-yellow-500"> {userDisplay.email}</span>
+          </p>
+        </CardBody>
+        <form method="dialog" className="modal-backdrop">
+          <Button className="p-3">
+            <button>close</button>
+          </Button>
+        </form>
+      </Card>
     </dialog>
   );
 }
