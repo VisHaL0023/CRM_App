@@ -2,7 +2,7 @@ import MainRoutes from "./routers/MainRoutes";
 
 function App() {
   return (
-    <div className="bg-blue-gray-50 h-screen">
+    <div className="min-h-screen ring-offset-blue-gray-50">
       <MainRoutes />
     </div>
   );

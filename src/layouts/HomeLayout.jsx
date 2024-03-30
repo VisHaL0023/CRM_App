@@ -36,6 +36,7 @@ function HomeLayout({ children }) {
 
   const [open, setOpen] = useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [dashboardName, setDashboardName] = useState("Home");
 
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
@@ -55,13 +56,16 @@ function HomeLayout({ children }) {
 
   return (
     <>
-      <IconButton variant="text" size="lg" onClick={openDrawer}>
-        {isDrawerOpen ? (
-          <XMarkIcon className="h-8 w-8 stroke-2" />
-        ) : (
-          <Bars3Icon className="h-8 w-8 stroke-2" />
-        )}
-      </IconButton>
+      <div className="flex items-center justify-start shadow-md py-1">
+        <IconButton variant="text" size="lg" onClick={openDrawer}>
+          {isDrawerOpen ? (
+            <XMarkIcon className="h-8 w-8 stroke-2" />
+          ) : (
+            <Bars3Icon className="h-8 w-8 stroke-2" />
+          )}
+        </IconButton>
+        <p className="text-2xl ml-4">{dashboardName}</p>
+      </div>
       <Drawer open={isDrawerOpen} onClose={closeDrawer}>
         <Card
           color="transparent"
@@ -74,7 +78,7 @@ function HomeLayout({ children }) {
             </Typography>
           </div>
           <List>
-            <Link to="/">
+            <Link to="/" onClick={() => setDashboardName("Home")}>
               <ListItem>
                 <ListItemPrefix>
                   <HomeIcon className="h-5 w-5" />
@@ -82,7 +86,7 @@ function HomeLayout({ children }) {
                 Home
               </ListItem>
             </Link>
-            <Link to="/dashboard">
+            <Link to="/dashboard" onClick={() => setDashboardName("Dashboard")}>
               <ListItem>
                 <ListItemPrefix>
                   <PresentationChartBarIcon className="h-5 w-5" />
@@ -117,13 +121,19 @@ function HomeLayout({ children }) {
               </ListItem>
               <AccordionBody className="py-1">
                 <List className="p-0">
-                  <Link to="/dashboard">
+                  <Link
+                    to="/dashboard"
+                    onClick={() => setDashboardName("All Tickets")}
+                  >
                     <ListItem>
                       <ListItemPrefix></ListItemPrefix>
                       All Tickets
                     </ListItem>
                   </Link>
-                  <Link to="/ticket/create">
+                  <Link
+                    to="/ticket/create"
+                    onClick={() => setDashboardName("Create new ticket")}
+                  >
                     <ListItem>
                       <ListItemPrefix></ListItemPrefix>
                       Create new ticket
@@ -146,7 +156,10 @@ function HomeLayout({ children }) {
               <>
                 {authState.role === "admin" && (
                   <li>
-                    <Link to="/users">
+                    <Link
+                      to="/users"
+                      onClick={() => setDashboardName("All users")}
+                    >
                       <ListItem>
                         <ListItemPrefix>
                           <UserCircleIcon className="h-5 w-5" />

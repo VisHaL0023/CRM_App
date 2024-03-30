@@ -46,79 +46,88 @@ const Home = () => {
 
   return (
     <HomeLayout>
-      {ticketsState && (
-        <div className="mt-10 flex flex-row justify-center items-center gap-5 flex-wrap">
-          <Card
-            titleText="Open"
-            status={getPercentage("open")}
-            quantity={ticketsState.ticketDistribution.open}
-            background="bg-yellow-300"
-            borderColor="border-green-300"
-            fontColor="text-black"
-            dividerColor="bg-black"
-          >
-            <BsFillPencilFill className="inline mr-2" />
-          </Card>
-          <Card
-            titleText="In Progress"
-            status={getPercentage("inProgress")}
-            quantity={ticketsState.ticketDistribution.inProgress}
-            background="bg-orange-300"
-            borderColor="border-red-400"
-            fontColor="text-black"
-            dividerColor="bg-black"
-          >
-            <TbProgressBolt className="inline mr-2" />
-          </Card>
-          <Card
-            titleText="Resolved"
-            status={getPercentage("resolved")}
-            quantity={ticketsState.ticketDistribution.resolved}
-            background="bg-green-300"
-            borderColor="border-green-700"
-            fontColor="text-black"
-            dividerColor="bg-black"
-          >
-            <MdOutlineDoneAll className="inline mr-2" />
-          </Card>
-          <Card
-            titleText="On Hold"
-            status={getPercentage("onHold")}
-            quantity={ticketsState.ticketDistribution.onHold}
-            background="bg-gray-300"
-            borderColor="border-gray-800"
-            fontColor="text-black"
-            dividerColor="bg-black"
-          >
-            <MdPending className="inline mr-2" />
-          </Card>
-          <Card
-            titleText="Cancelled"
-            status={getPercentage("cancelled")}
-            quantity={ticketsState.ticketDistribution.cancelled}
-            background="bg-blue-300"
-            borderColor="border-violet-500"
-            fontColor="text-black"
-            dividerColor="bg-black"
-          >
-            <MdCancel className="inline mr-2" />
-          </Card>
+      <div className="lg:flex flex-row items-start justify-center">
+        <div className="lg:w-2/5 md:w-full">
+          <p className="text-2xl mt-3">Check all your tickets status here</p>
+          {ticketsState && (
+            <div className="mt-10 flex flex-row justify-center items-center gap-5 flex-wrap">
+              <Card
+                titleText="Open"
+                status={getPercentage("open")}
+                quantity={ticketsState.ticketDistribution.open}
+                background="bg-yellow-300"
+                borderColor="border-green-300"
+                fontColor="text-black"
+                dividerColor="bg-black"
+              >
+                <BsFillPencilFill className="inline mr-2" />
+              </Card>
+              <Card
+                titleText="In Progress"
+                status={getPercentage("inProgress")}
+                quantity={ticketsState.ticketDistribution.inProgress}
+                background="bg-orange-300"
+                borderColor="border-red-400"
+                fontColor="text-black"
+                dividerColor="bg-black"
+              >
+                <TbProgressBolt className="inline mr-2" />
+              </Card>
+              <Card
+                titleText="Resolved"
+                status={getPercentage("resolved")}
+                quantity={ticketsState.ticketDistribution.resolved}
+                background="bg-green-300"
+                borderColor="border-green-700"
+                fontColor="text-black"
+                dividerColor="bg-black"
+              >
+                <MdOutlineDoneAll className="inline mr-2" />
+              </Card>
+              <Card
+                titleText="On Hold"
+                status={getPercentage("onHold")}
+                quantity={ticketsState.ticketDistribution.onHold}
+                background="bg-gray-300"
+                borderColor="border-gray-800"
+                fontColor="text-black"
+                dividerColor="bg-black"
+              >
+                <MdPending className="inline mr-2" />
+              </Card>
+              <Card
+                titleText="Cancelled"
+                status={getPercentage("cancelled")}
+                quantity={ticketsState.ticketDistribution.cancelled}
+                background="bg-blue-300"
+                borderColor="border-violet-500"
+                fontColor="text-black"
+                dividerColor="bg-black"
+              >
+                <MdCancel className="inline mr-2" />
+              </Card>
+            </div>
+          )}
         </div>
-      )}
-      <div className="mt-10 flex justify-center items-center gap-10">
-        <div className="w-80 h-80 ">
-          <Pie data={pieChartData} />
-        </div>
-      </div>
-      <div className="mt-10 flex justify-center items-center gap-10">
-        <div className="w-[40rem] h-[40rem]">
-          <Line data={lineChartData} />
-        </div>
-      </div>
 
-      <div className="mt-10 mb-10 flex justify-center items-center gap-10">
-        <div className="w-[50rem] bg-[wheat]">
-          <Bar data={barChartData} />
+        <div className="lg:w-3/5 md:w-full">
+          <p className="text-2xl mt-3 ml-2">Visualization using charts</p>
+          <div className="mt-10 flex justify-center items-center gap-10">
+            <div className="w-80 h-80 ">
+              <Pie data={pieChartData} />
+            </div>
+          </div>
+          <div className="mt-10 flex justify-center items-center gap-10">
+            <div className="w-[40rem] h-[25rem]">
+              <Line data={lineChartData} />
+            </div>
+          </div>
+
+          <div className="mt-10 mb-10 flex justify-center items-center gap-10">
+            <div className="w-[50rem] bg-[wheat]">
+              <Bar data={barChartData} />
+            </div>
+          </div>
         </div>
       </div>
     </HomeLayout>

@@ -161,92 +161,98 @@ function Dashboard() {
                   ))}
                 </tr>
               </thead>
-              <tbody>
-                {filteredTicket
-                  .slice(startIndex, endIndex)
-                  .map((ticket, index) => {
-                    const isLast = index === filteredTicket.length - 1;
-                    const classes = isLast
-                      ? "p-4"
-                      : "p-4 border-b border-blue-gray-50";
+              {filteredTicket.length > 0 ? (
+                <tbody>
+                  {filteredTicket
+                    .slice(startIndex, endIndex)
+                    .map((ticket, index) => {
+                      const isLast = index === filteredTicket.length - 1;
+                      const classes = isLast
+                        ? "p-4"
+                        : "p-4 border-b border-blue-gray-50";
 
-                    return (
-                      <tr key={ticket._id}>
-                        <td className={classes}>
-                          <div className="flex flex-col">
+                      return (
+                        <tr key={ticket._id}>
+                          <td className={classes}>
+                            <div className="flex flex-col">
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal"
+                              >
+                                {ticket._id.substring(0, 5) + "..."}
+                              </Typography>
+                            </div>
+                          </td>
+                          <td className={classes}>
+                            <div className="flex flex-col">
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal"
+                              >
+                                {ticket.title}
+                              </Typography>
+                            </div>
+                          </td>
+
+                          <td className={classes}>
                             <Typography
                               variant="small"
                               color="blue-gray"
                               className="font-normal"
                             >
-                              {ticket._id.substring(0, 5) + "..."}
+                              {ticket.assignee}
                             </Typography>
-                          </div>
-                        </td>
-                        <td className={classes}>
-                          <div className="flex flex-col">
+                          </td>
+
+                          <td className={classes}>
                             <Typography
                               variant="small"
                               color="blue-gray"
                               className="font-normal"
                             >
-                              {ticket.title}
+                              {ticket.ticketPriority}
                             </Typography>
-                          </div>
-                        </td>
-
-                        <td className={classes}>
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal"
+                          </td>
+                          <td className={classes}>
+                            <Chip
+                              variant="ghost"
+                              size="sm"
+                              value={ticket.status}
+                              color={getColorTicketStatus(ticket.status)}
+                            />
+                          </td>
+                          <td className={classes}>
+                            <div className="w-max">
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal"
+                              >
+                                {extactDate(ticket.createdAt)}
+                              </Typography>
+                            </div>
+                          </td>
+                          <td
+                            className={classes}
+                            onClick={() => {
+                              setSelectedTicket(ticket);
+                            }}
                           >
-                            {ticket.assignee}
-                          </Typography>
-                        </td>
-
-                        <td className={classes}>
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal"
-                          >
-                            {ticket.ticketPriority}
-                          </Typography>
-                        </td>
-                        <td className={classes}>
-                          <Chip
-                            variant="ghost"
-                            size="sm"
-                            value={ticket.status}
-                            color={getColorTicketStatus(ticket.status)}
-                          />
-                        </td>
-                        <td className={classes}>
-                          <div className="w-max">
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal"
-                            >
-                              {extactDate(ticket.createdAt)}
-                            </Typography>
-                          </div>
-                        </td>
-                        <td
-                          className={classes}
-                          onClick={() => {
-                            setSelectedTicket(ticket);
-                          }}
-                        >
-                          <IconButton variant="text">
-                            <PencilIcon className="h-4 w-4" />
-                          </IconButton>
-                        </td>
-                      </tr>
-                    );
-                  })}
-              </tbody>
+                            <IconButton variant="text">
+                              <PencilIcon className="h-4 w-4" />
+                            </IconButton>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              ) : (
+                <div className="flex items-center justify-center mt-3 text-xl">
+                  No ticket found
+                </div>
+              )}
             </table>
           </CardBody>
           <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">

@@ -1,11 +1,4 @@
-import {
-  Button,
-  Card,
-  CardBody,
-  Checkbox,
-  Input,
-  Typography,
-} from "@material-tailwind/react";
+import { Button, Card, Input, Typography } from "@material-tailwind/react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
