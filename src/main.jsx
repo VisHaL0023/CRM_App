@@ -1,5 +1,6 @@
 import "./index.css";
 
+import { ThemeProvider } from "@material-tailwind/react";
 import ReactDOM from "react-dom/client";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
@@ -10,9 +11,11 @@ import store from "./Redux/store.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <Provider store={store}>
-      <App />
-      <Toaster />
-    </Provider>
+    <ThemeProvider>
+      <Provider store={store}>
+        <App />
+        <Toaster />
+      </Provider>
+    </ThemeProvider>
   </BrowserRouter>
 );

@@ -1,5 +1,29 @@
+import {
+  Bars3Icon,
+  ChevronDownIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
+import {
+  HomeIcon,
+  PowerIcon,
+  PresentationChartBarIcon,
+  TicketIcon,
+  UserCircleIcon,
+} from "@heroicons/react/24/solid";
+import {
+  Accordion,
+  AccordionBody,
+  AccordionHeader,
+  Card,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemPrefix,
+  Typography,
+} from "@material-tailwind/react";
 import { useEffect } from "react";
-import { FiMenu } from "react-icons/fi";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -9,6 +33,16 @@ function HomeLayout({ children }) {
   const authState = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [open, setOpen] = useState(0);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const handleOpen = (value) => {
+    setOpen(open === value ? 0 : value);
+  };
+
+  const openDrawer = () => setIsDrawerOpen(true);
+  const closeDrawer = () => setIsDrawerOpen(false);
 
   function onLogout() {
     dispatch(logout());
@@ -20,74 +54,124 @@ function HomeLayout({ children }) {
   }, []);
 
   return (
-    <div className="min-h-[90vh]">
-      <div className="drawer absolute left-0 right-0 cursor-pointer mt-4 ml-4 inline z-30">
-        <input id="my-drawer" type="checkbox" className="drawer-toggle " />
-        <div className="drawer-content">
-          <label htmlFor="my-drawer">
-            <FiMenu size={"32px"} className="cursor-pointer" />
-          </label>
-        </div>
-        <div className="drawer-side">
-          <label htmlFor="my-drawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/dashboard">Dashboard</Link>
-            </li>
-            {authState.isLoggedIn && (
-              <li>
-                <Link to="/ticket/create">Create Ticket</Link>
-              </li>
-            )}
-            {authState.role === "admin" && (
-              <li>
-                <Link to="/users">All Users</Link>
-              </li>
-            )}
+    <>
+      <IconButton variant="text" size="lg" onClick={openDrawer}>
+        {isDrawerOpen ? (
+          <XMarkIcon className="h-8 w-8 stroke-2" />
+        ) : (
+          <Bars3Icon className="h-8 w-8 stroke-2" />
+        )}
+      </IconButton>
+      <Drawer open={isDrawerOpen} onClose={closeDrawer}>
+        <Card
+          color="transparent"
+          shadow={false}
+          className="h-[calc(100vh-2rem)] w-full p-3"
+        >
+          <div className="mb-2 flex items-center gap-4 p-4">
+            <Typography variant="h5" color="blue-gray">
+              Hi
+            </Typography>
+          </div>
+          <List>
+            <Link to="/">
+              <ListItem>
+                <ListItemPrefix>
+                  <HomeIcon className="h-5 w-5" />
+                </ListItemPrefix>
+                Home
+              </ListItem>
+            </Link>
+            <Link to="/dashboard">
+              <ListItem>
+                <ListItemPrefix>
+                  <PresentationChartBarIcon className="h-5 w-5" />
+                </ListItemPrefix>
+                Dashboard
+              </ListItem>
+            </Link>
 
-            <li className="absolute bottom-8 w-3/4">
-              <div className="w-full flex justify-center items-center">
-                {!authState.isLoggedIn ? (
-                  <>
-                    <Link
-                      to="/login"
-                      className="btn-primary text-center px-2 py-1 rounded-md font-semibold w-full"
-                    >
-                      Login
+            <Accordion
+              open={open === 1}
+              icon={
+                <ChevronDownIcon
+                  strokeWidth={2.5}
+                  className={`mx-auto h-4 w-4 transition-transform ${
+                    open === 1 ? "rotate-180" : ""
+                  }`}
+                />
+              }
+            >
+              <ListItem className="p-0" selected={open === 1}>
+                <AccordionHeader
+                  onClick={() => handleOpen(1)}
+                  className="border-b-0 p-3"
+                >
+                  <ListItemPrefix>
+                    <TicketIcon className="h-5 w-5" />
+                  </ListItemPrefix>
+                  <Typography color="blue-gray" className="mr-auto font-normal">
+                    Ticket
+                  </Typography>
+                </AccordionHeader>
+              </ListItem>
+              <AccordionBody className="py-1">
+                <List className="p-0">
+                  <Link to="/dashboard">
+                    <ListItem>
+                      <ListItemPrefix></ListItemPrefix>
+                      All Tickets
+                    </ListItem>
+                  </Link>
+                  <Link to="/ticket/create">
+                    <ListItem>
+                      <ListItemPrefix></ListItemPrefix>
+                      Create new ticket
+                    </ListItem>
+                  </Link>
+                </List>
+              </AccordionBody>
+            </Accordion>
+
+            {!authState.isLoggedIn ? (
+              <Link to="/login">
+                <ListItem>
+                  <ListItemPrefix>
+                    <PowerIcon className="h-5 w-5" />
+                  </ListItemPrefix>
+                  Log In
+                </ListItem>
+              </Link>
+            ) : (
+              <>
+                {authState.role === "admin" && (
+                  <li>
+                    <Link to="/users">
+                      <ListItem>
+                        <ListItemPrefix>
+                          <UserCircleIcon className="h-5 w-5" />
+                        </ListItemPrefix>
+                        All Users
+                      </ListItem>
                     </Link>
-                    <Link
-                      to="/signup"
-                      className="btn-secondary text-center px-2 py-1 rounded-md font-semibold w-full"
-                    >
-                      Signup
-                    </Link>
-                  </>
-                ) : (
-                  <>
-                    <button
-                      onClick={onLogout}
-                      className="btn-primary px-2 py-1 rounded-md font-semibold w-full"
-                    >
-                      Logout
-                    </button>
-                    <Link className="btn-secondary px-2 py-1 rounded-md font-semibold w-full text-center">
-                      Profile
-                    </Link>
-                  </>
+                  </li>
                 )}
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
 
+                <ListItem onClick={onLogout}>
+                  <ListItemPrefix>
+                    <PowerIcon className="h-5 w-5" />
+                  </ListItemPrefix>
+                  Log out
+                </ListItem>
+              </>
+            )}
+          </List>
+        </Card>
+      </Drawer>
       <div className="flex items-start justify-center">
-        <div className="w-3/4">{children}</div>
+        <div className="w-[90%]">{children}</div>
       </div>
-    </div>
+    </>
   );
 }
 
