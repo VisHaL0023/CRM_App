@@ -57,7 +57,7 @@ function CreateTicket() {
   return (
     <HomeLayout>
       <div className="flex felx-col items-center justify-center mt-5 p-5">
-        <div className="flex-col items-center justify-center mr-16">
+        <div className="flex-col items-center justify-center mr-16 md:hidden sm:hidden lg:block">
           <Typography variant="h2" color="blue-gray">
             Create your ticket
           </Typography>

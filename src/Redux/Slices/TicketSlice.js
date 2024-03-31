@@ -113,7 +113,7 @@ const ticketSlice = createSlice({
   reducers: {
     filterTickets: (state, action) => {
       console.log(action.payload);
-      let status = action.payload.status.toLowerCase();
+      let status = action?.payload?.status?.toLowerCase();
       if (status == "in progress") status = "inProgress";
       if (status == "on hold") status = "onHold";
       state.ticketList = state.downloadedTickets.filter(
@@ -161,7 +161,7 @@ const ticketSlice = createSlice({
         });
       })
       .addCase(updateTicket.fulfilled, (state, action) => {
-        const updatedTicket = action.payload.data.result;
+        const updatedTicket = action?.payload?.data?.result;
         state.ticketList = state.ticketList.map((ticket) => {
           if (ticket._id == updatedTicket._id) return updatedTicket;
           return ticket;

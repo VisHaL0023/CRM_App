@@ -51,12 +51,16 @@ function HomeLayout({ children }) {
   }
 
   useEffect(() => {
+    console.log("dashboard name", dashboardName);
+  }, [dashboardName]);
+
+  useEffect(() => {
     if (!authState.isLoggedIn) navigate("/login");
   }, []);
 
   return (
     <>
-      <div className="flex items-center justify-start shadow-md py-1">
+      <div className="flex items-center justify-start shadow-md py-1 sticky top-0 bg-nvColor z-10 w-screen">
         <IconButton variant="text" size="lg" onClick={openDrawer}>
           {isDrawerOpen ? (
             <XMarkIcon className="h-8 w-8 stroke-2" />
@@ -73,21 +77,30 @@ function HomeLayout({ children }) {
           className="h-[calc(100vh-2rem)] w-full p-3"
         >
           <div className="mb-2 flex items-center gap-4 p-4">
-            <Typography variant="h3" color="blue-gray">
-              Hi {authState?.data?.name}
-            </Typography>
+            <div className="flex items-baseline justify-start gap-2">
+              <Typography
+                variant="paragraph"
+                className="text-xl"
+                color="blue-gray"
+              >
+                Hi,
+              </Typography>
+              <Typography variant="h3" color="blue-gray">
+                {authState?.data?.name}
+              </Typography>
+            </div>
           </div>
           <List>
-            <Link to="/" onClick={() => setDashboardName("Home")}>
-              <ListItem>
+            <Link to="/">
+              <ListItem onClick={() => setDashboardName("Home")}>
                 <ListItemPrefix>
                   <HomeIcon className="h-5 w-5" />
                 </ListItemPrefix>
                 Home
               </ListItem>
             </Link>
-            <Link to="/dashboard" onClick={() => setDashboardName("Dashboard")}>
-              <ListItem>
+            <Link to="/dashboard">
+              <ListItem onClick={() => setDashboardName("Dashboard")}>
                 <ListItemPrefix>
                   <PresentationChartBarIcon className="h-5 w-5" />
                 </ListItemPrefix>
@@ -121,20 +134,16 @@ function HomeLayout({ children }) {
               </ListItem>
               <AccordionBody className="py-1">
                 <List className="p-0">
-                  <Link
-                    to="/dashboard"
-                    onClick={() => setDashboardName("All Tickets")}
-                  >
-                    <ListItem>
+                  <Link to="/dashboard">
+                    <ListItem onClick={() => setDashboardName("All Tickets")}>
                       <ListItemPrefix></ListItemPrefix>
                       All Tickets
                     </ListItem>
                   </Link>
-                  <Link
-                    to="/ticket/create"
-                    onClick={() => setDashboardName("Create new ticket")}
-                  >
-                    <ListItem>
+                  <Link to="/ticket/create">
+                    <ListItem
+                      onClick={() => setDashboardName("Create new ticket")}
+                    >
                       <ListItemPrefix></ListItemPrefix>
                       Create new ticket
                     </ListItem>
@@ -156,11 +165,8 @@ function HomeLayout({ children }) {
               <>
                 {authState.role === "admin" && (
                   <li>
-                    <Link
-                      to="/users"
-                      onClick={() => setDashboardName("All users")}
-                    >
-                      <ListItem>
+                    <Link to="/users">
+                      <ListItem onClick={() => setDashboardName("All users")}>
                         <ListItemPrefix>
                           <UserCircleIcon className="h-5 w-5" />
                         </ListItemPrefix>

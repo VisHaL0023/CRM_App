@@ -75,7 +75,7 @@ function ListAllUsers() {
     <HomeLayout>
       <div className="min-h-[90vh] flex flex-col items-center justify-center mt-3">
         {userList && (
-          <Card className="h-full w-3/4 ">
+          <Card className="h-full w-[85%]">
             <CardHeader floated={false} shadow={false} className="rounded-none">
               <div className="mb-1 flex flex-col items-center justify-center content-center gap-2">
                 <Typography variant="h2" color="blue-gray">

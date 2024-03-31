@@ -124,7 +124,7 @@ const Home = () => {
           </div>
 
           <div className="mt-10 mb-10 flex justify-center items-center gap-10">
-            <div className="w-[50rem] bg-[wheat]">
+            <div className="w-[50rem] bg-blue-gray-50">
               <Bar data={barChartData} />
             </div>
           </div>

@@ -9,6 +9,7 @@ function TicketDetailsModal({ ticket }) {
 
   function handleTicketChange(e) {
     const { name, value } = e.target;
+    console.log(name, value);
     setCurrentTicket({
       ...currentTicket,
       [name]: value,
