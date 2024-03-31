@@ -123,6 +123,18 @@ const ticketSlice = createSlice({
     resetTicketList: (state) => {
       state.ticketList = state.downloadedTickets;
     },
+    afterLogout: (state) => {
+      localStorage.clear();
+      state.downloadedTickets = [];
+      state.ticketList = [];
+      state.ticketDistribution = {
+        open: 0,
+        inProgress: 0,
+        resolved: 0,
+        onHold: 0,
+        cancelled: 0,
+      };
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -202,5 +214,6 @@ const ticketSlice = createSlice({
   },
 });
 
-export const { filterTickets, resetTicketList } = ticketSlice.actions;
+export const { filterTickets, resetTicketList, afterLogout } =
+  ticketSlice.actions;
 export default ticketSlice.reducer;

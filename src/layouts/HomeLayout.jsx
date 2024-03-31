@@ -28,6 +28,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import { logout } from "../Redux/Slices/AuthSlice";
+import { afterLogout } from "../Redux/Slices/TicketSlice";
 
 function HomeLayout({ children }) {
   const authState = useSelector((state) => state.auth);
@@ -47,6 +48,7 @@ function HomeLayout({ children }) {
 
   function onLogout() {
     dispatch(logout());
+    dispatch(afterLogout());
     navigate("/login");
   }
 
